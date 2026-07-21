@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="js/api.js"></script>
+</head>
+<body>
+
+<button onclick="test()">Test API</button>
+
+<script>
+async function test(){
+
+    const result = await api("hello", {
+        name: "Raymond"
+    });
+
+    console.log(result);
+
+}
+</script>
+
+</body>
+</html>
