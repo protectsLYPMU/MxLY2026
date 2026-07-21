@@ -3,12 +3,15 @@ const API_URL =
 
 async function api(action, data = {}) {
 
+  const token = localStorage.getItem("sessionToken");
+
   try {
 
     const response = await fetch(API_URL, {
       method: "POST",
       body: JSON.stringify({
         action,
+        sessionToken: token,
         ...data
       })
     });
