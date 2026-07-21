@@ -3,14 +3,27 @@ const API_URL =
 
 async function api(action, data = {}) {
 
+  try {
+
     const response = await fetch(API_URL, {
-        method: "POST",
-        body: JSON.stringify({
-            action,
-            ...data
-        })
+      method: "POST",
+      body: JSON.stringify({
+        action,
+        ...data
+      })
     });
 
     return await response.json();
+
+  } catch (err) {
+
+    console.error(err);
+
+    return {
+      success: false,
+      message: err.message
+    };
+
+  }
 
 }
