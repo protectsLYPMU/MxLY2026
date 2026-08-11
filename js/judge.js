@@ -13,8 +13,9 @@ function loadJudgeInfo() {
 
     if (!userJSON) {
 
-        window.location.href =
-            "login.html";
+        document.getElementById(
+            "judgeName"
+        ).textContent = "Test Judge";
 
         return;
 
