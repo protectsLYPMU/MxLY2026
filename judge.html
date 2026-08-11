@@ -1,1 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Judge Scoring</title>
+
+</head>
+
+<body>
+
+    <h2>Pageant Scoring</h2>
+
+    <p>
+        Judge:
+        <strong id="judgeName"></strong>
+    </p>
+
+    <hr>
+
+    <h3 id="segmentName">
+        Loading...
+    </h3>
+
+    <p>
+        Candidate #
+        <strong id="candidateNumber"></strong>
+    </p>
+
+    <h2 id="candidateName">
+        Loading...
+    </h2>
+
+    <hr>
+
+    <h1 id="timerDisplay">
+        00:00
+    </h1>
+
+    <p id="timerStatus">
+        Loading...
+    </p>
+
+    <hr>
+
+    <h3>Your Score</h3>
+
+    <div id="scoreButtons">
+
+        <button data-score="1">1</button>
+        <button data-score="2">2</button>
+        <button data-score="3">3</button>
+        <button data-score="4">4</button>
+        <button data-score="5">5</button>
+        <button data-score="6">6</button>
+        <button data-score="7">7</button>
+        <button data-score="8">8</button>
+        <button data-score="9">9</button>
+        <button data-score="10">10</button>
+
+    </div>
+
+    <p>
+        Selected score:
+        <strong id="selectedScore">None</strong>
+    </p>
+
+    <button id="submitScoreBtn" disabled>
+        Submit Score
+    </button>
+
+    <p id="scoreMessage"></p>
+
+    <script src="js/api.js"></script>
+    <script src="js/judge.js"></script>
+
+</body>
+
+</html>
