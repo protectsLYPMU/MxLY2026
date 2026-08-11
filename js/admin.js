@@ -1,3 +1,4 @@
+let currentTimerDuration = 0;
 let timerInterval = null;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -67,6 +68,11 @@ async function loadState() {
 
     document.getElementById("candidateName").textContent =
         performance.candidate.Name;
+    
+    currentTimerDuration =
+    Number(
+        performance.segment.TimerSeconds
+    );
 
     renderTimer(
     result.data.timer
@@ -160,20 +166,8 @@ function displayTimer(seconds) {
 
 async function startTimer() {
 
-    const state =
-        await api("getCurrentState");
-
-    if (!state.success) {
-        alert(state.message);
-        return;
-    }
-
-    const seconds =
-        Number(
-            state.data.performance.segment.TimerSeconds
-        );
-
-    if (!seconds || seconds <= 0) {
+    if (!currentTimerDuration ||
+        currentTimerDuration <= 0) {
 
         alert(
             "No timer duration is configured for this segment."
@@ -182,31 +176,57 @@ async function startTimer() {
         return;
     }
 
+    // Immediately show the timer locally
+    renderTimer({
+        status: "Running",
+        duration: currentTimerDuration,
+        remaining: currentTimerDuration,
+        endTime:
+            Date.now() +
+            currentTimerDuration * 1000
+    });
+
+    // Tell the backend to officially start the timer
     const result =
         await api("startTimer", {
-            seconds: seconds
+            seconds: currentTimerDuration
         });
 
     if (!result.success) {
+
+        clearInterval(timerInterval);
+
         alert(result.message);
+
+        await loadState();
+
         return;
     }
 
-    await loadState();
+    // Correct the local timer using the official server state
+    renderTimer(result.timer);
 
 }
 
 async function pauseTimer() {
 
+    // Immediately stop the local countdown
+    clearInterval(timerInterval);
+
     const result =
         await api("pauseTimer");
 
     if (!result.success) {
+
         alert(result.message);
+
+        await loadState();
+
         return;
     }
 
-    await loadState();
+    // Synchronize with official server state
+    renderTimer(result.timer);
 
 }
 
@@ -216,24 +236,32 @@ async function resumeTimer() {
         await api("resumeTimer");
 
     if (!result.success) {
+
         alert(result.message);
+
         return;
     }
 
-    await loadState();
+    renderTimer(result.timer);
 
 }
 
 async function stopTimer() {
 
+    clearInterval(timerInterval);
+
     const result =
         await api("stopTimer");
 
     if (!result.success) {
+
         alert(result.message);
+
+        await loadState();
+
         return;
     }
 
-    await loadState();
+    renderTimer(result.timer);
 
 }
