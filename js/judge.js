@@ -298,13 +298,59 @@ function resetScore() {
 
 }
 
+async function loadMyScore() {
+
+    const result =
+        await api("getMyScore");
+
+    if (!result.success) {
+        return;
+    }
+
+    if (result.data.hasSubmitted) {
+
+        selectedScore =
+            result.data.score;
+
+        hasSubmitted = true;
+
+        document.getElementById(
+            "selectedScore"
+        ).textContent =
+            result.data.score;
+
+        document.getElementById(
+            "scoreMessage"
+        ).textContent =
+            "Score already submitted.";
+
+        document.getElementById(
+            "submitScoreBtn"
+        ).disabled = true;
+
+        document
+            .querySelectorAll(
+                "#scoreButtons button"
+            )
+            .forEach(button => {
+
+                button.disabled = true;
+
+            });
+
+    }
+
+}
+
 document.addEventListener(
     "DOMContentLoaded",
     () => {
 
         loadJudgeInfo();
 
-        loadState();
+        await loadState();
+
+        await loadMyScore();
 
     }
 );
