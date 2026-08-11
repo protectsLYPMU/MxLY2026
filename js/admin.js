@@ -1,14 +1,50 @@
+let timerInterval = null;
+
 document.addEventListener("DOMContentLoaded", () => {
 
     loadState();
 
     document
         .getElementById("nextBtn")
-        .addEventListener("click", nextPerformance);
+        .addEventListener(
+            "click",
+            nextPerformance
+        );
 
     document
         .getElementById("prevBtn")
-        .addEventListener("click", previousPerformance);
+        .addEventListener(
+            "click",
+            previousPerformance
+        );
+
+    document
+        .getElementById("startTimerBtn")
+        .addEventListener(
+            "click",
+            startTimer
+        );
+
+    document
+        .getElementById("pauseTimerBtn")
+        .addEventListener(
+            "click",
+            pauseTimer
+        );
+
+    document
+        .getElementById("resumeTimerBtn")
+        .addEventListener(
+            "click",
+            resumeTimer
+        );
+
+    document
+        .getElementById("stopTimerBtn")
+        .addEventListener(
+            "click",
+            stopTimer
+        );
 
 });
 
@@ -32,6 +68,10 @@ async function loadState() {
     document.getElementById("candidateName").textContent =
         performance.candidate.Name;
 
+    renderTimer(
+    result.data.timer
+    );
+
 }
 
 async function nextPerformance() {
@@ -50,6 +90,144 @@ async function nextPerformance() {
 async function previousPerformance() {
 
     const result = await api("previousPerformance");
+
+    if (!result.success) {
+        alert(result.message);
+        return;
+    }
+
+    await loadState();
+
+}
+
+function renderTimer(timer) {
+
+    document.getElementById("timerStatus").textContent =
+        timer.status;
+
+    updateTimerDisplay(timer);
+
+}
+
+function updateTimerDisplay(timer) {
+
+    clearInterval(timerInterval);
+
+    let remaining = timer.remaining;
+
+    displayTimer(remaining);
+
+    if (timer.status !== "Running") {
+        return;
+    }
+
+    timerInterval = setInterval(() => {
+
+        remaining--;
+
+        if (remaining <= 0) {
+
+            remaining = 0;
+
+            clearInterval(timerInterval);
+
+        }
+
+        displayTimer(remaining);
+
+    }, 1000);
+
+}
+
+function displayTimer(seconds) {
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const remainingSeconds =
+        seconds % 60;
+
+    const formatted =
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(remainingSeconds).padStart(2, "0");
+
+    document.getElementById(
+        "timerDisplay"
+    ).textContent = formatted;
+
+}
+
+async function startTimer() {
+
+    const state =
+        await api("getCurrentState");
+
+    if (!state.success) {
+        alert(state.message);
+        return;
+    }
+
+    const seconds =
+        Number(
+            state.data.performance.segment.TimerSeconds
+        );
+
+    if (!seconds || seconds <= 0) {
+
+        alert(
+            "No timer duration is configured for this segment."
+        );
+
+        return;
+    }
+
+    const result =
+        await api("startTimer", {
+            seconds: seconds
+        });
+
+    if (!result.success) {
+        alert(result.message);
+        return;
+    }
+
+    await loadState();
+
+}
+
+async function pauseTimer() {
+
+    const result =
+        await api("pauseTimer");
+
+    if (!result.success) {
+        alert(result.message);
+        return;
+    }
+
+    await loadState();
+
+}
+
+async function resumeTimer() {
+
+    const result =
+        await api("resumeTimer");
+
+    if (!result.success) {
+        alert(result.message);
+        return;
+    }
+
+    await loadState();
+
+}
+
+async function stopTimer() {
+
+    const result =
+        await api("stopTimer");
 
     if (!result.success) {
         alert(result.message);
