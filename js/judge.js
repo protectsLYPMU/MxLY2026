@@ -163,6 +163,23 @@ document
 
     });
 
+document
+    .querySelectorAll(
+        "#scoreButtons button"
+    )
+    .forEach(button => {
+
+        if (
+            Number(button.dataset.score) ===
+            result.data.score
+        ) {
+
+            button.style.fontWeight = "bold";
+
+        }
+
+    });
+
 async function submitScore() {
 
     if (selectedScore === null) {
