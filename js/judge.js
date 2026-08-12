@@ -166,15 +166,27 @@ document
 async function submitScore() {
 
     if (selectedScore === null) {
+        return;
+    }
+
+    const sessionToken =
+        localStorage.getItem("sessionToken");
+
+    if (!sessionToken) {
+
+        document.getElementById(
+            "scoreMessage"
+        ).textContent =
+            "No active session. Please log in again.";
 
         return;
-
     }
 
     const result =
         await api(
             "submitScore",
             {
+                sessionToken: sessionToken,
                 score: selectedScore
             }
         );
@@ -187,7 +199,6 @@ async function submitScore() {
             result.message;
 
         return;
-
     }
 
     hasSubmitted = true;
