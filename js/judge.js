@@ -361,7 +361,7 @@ async function loadMyScore() {
 
 document.addEventListener(
     "DOMContentLoaded",
-    () => {
+    async () => {
 
         loadJudgeInfo();
 
