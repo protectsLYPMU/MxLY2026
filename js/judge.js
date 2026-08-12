@@ -233,10 +233,10 @@ document
         submitScore
     );
 
-setInterval(
-    checkForStateChange,
-    2000
-);
+// setInterval(
+//     checkForStateChange,
+//     2000
+// );
 
 async function checkForStateChange() {
 
