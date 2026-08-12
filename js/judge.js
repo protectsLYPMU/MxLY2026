@@ -273,7 +273,9 @@ async function checkForStateChange() {
 
         resetScore();
 
-        loadState();
+        await loadState();
+
+        await loadMyScore();
 
     }
 
