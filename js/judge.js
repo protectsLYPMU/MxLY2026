@@ -355,6 +355,23 @@ async function loadMyScore() {
 
             });
 
+        document
+                .querySelectorAll(
+                    "#scoreButtons button"
+                )
+                .forEach(button => {
+            
+                    if (
+                        Number(button.dataset.score) ===
+                        result.data.score
+                    ) {
+            
+                        button.style.fontWeight = "bold";
+            
+                    }
+            
+                });
+
     }
 
 }
