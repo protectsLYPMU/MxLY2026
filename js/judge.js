@@ -6,6 +6,11 @@ let currentPerformanceID = null;
 
 let hasSubmitted = false;
 
+setInterval(
+    checkForStateChange,
+    2000
+);
+
 function loadJudgeInfo() {
 
     const userJSON =
@@ -232,11 +237,6 @@ document
         "click",
         submitScore
     );
-
-setInterval(
-    checkForStateChange,
-    2000
-);
 
 async function checkForStateChange() {
 
