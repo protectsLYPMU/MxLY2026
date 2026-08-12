@@ -6,10 +6,10 @@ let currentPerformanceID = null;
 
 let hasSubmitted = false;
 
-setInterval(
-    checkForStateChange,
-    2000
-);
+// setInterval(
+//     checkForStateChange,
+//     2000
+// );
 
 function loadJudgeInfo() {
 
