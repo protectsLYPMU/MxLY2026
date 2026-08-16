@@ -211,6 +211,8 @@ async function submitScore() {
             }
         );
 
+    hideLoading();
+
     if (!result.success) {
 
         document.getElementById(
@@ -220,8 +222,6 @@ async function submitScore() {
 
         return;
     }
-
-    hideLoading();
 
     hasSubmitted = true;
 
