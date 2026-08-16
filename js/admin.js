@@ -90,6 +90,11 @@ async function loadState() {
 
     const result = await api("getCurrentState");
 
+    // Internet temporarily unavailable
+    if (result.offline){
+        return;
+    }
+
     if (!result.success) {
         alert(result.message);
         return;
