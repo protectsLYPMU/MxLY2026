@@ -467,27 +467,11 @@ async function closeScoring() {
 
 function updateScoringState(isOpen) {
 
-    // Don't unlock if already submitted
-    if(hasSubmitted){
-        return;
-    }
+    document.getElementById("openScoringBtn").disabled = isOpen;
 
-    document
-        .querySelectorAll("#scoreButtons button")
-        .forEach(button => {
-            button.disabled = !isOpen;
-        });
+    document.getElementById("closeScoringBtn").disabled = !isOpen;
 
-    document.getElementById(
-        "submitScoreBtn"
-    ).disabled =
-        !isOpen || selectedScore === null;
-
-    document.getElementById(
-        "scoreMessage"
-    ).textContent =
-        isOpen
-        ? ""
-        : "Waiting for scoring to open.";
+    document.getElementById("scoringStatus").textContent =
+        isOpen ? "SCORING OPEN" : "SCORING CLOSED";
 
 }
