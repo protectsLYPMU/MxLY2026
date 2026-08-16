@@ -5,6 +5,10 @@ async function loadResults() {
     const result =
         await api("getLiveResults");
 
+    if(result.offline){
+    return;
+    }
+
     if (!result.success) {
         return;
     }
