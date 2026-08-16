@@ -513,30 +513,24 @@ function updateScoringState(isOpen) {
 
 }
 
-async function validateAdminSession() {
+function validateAdmin() {
+    const userJSON = localStorage.getItem("user");
+    const token = localStorage.getItem("sessionToken");
 
-    const result = await api("validateSession");
-
-    console.log("Session check:", result);
-
-    if (!result.success) {
-
-        localStorage.clear();
+    if (!userJSON || !token) {
         window.location.href = "login.html";
         return false;
-
     }
 
-    if (result.data.user.role !== "Admin") {
+    const user = JSON.parse(userJSON);
 
+    if (user.role !== "Admin") {
         localStorage.clear();
         window.location.href = "login.html";
         return false;
-
     }
 
     return true;
-
 }
 
 document
