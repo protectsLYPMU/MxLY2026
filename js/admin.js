@@ -399,8 +399,6 @@ function renderJudgeStatuses(judges) {
 
 }
 
-let polling = false;
-
 async function pollAdminState(){
 
     if (polling) return;
