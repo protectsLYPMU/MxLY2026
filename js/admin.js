@@ -518,12 +518,12 @@ async function validateAdminSession() {
 
     const result = await api("validateSession");
 
+    console.log("Session check:", result);
+
     if (!result.success) {
 
         localStorage.clear();
-
         window.location.href = "login.html";
-
         return false;
 
     }
@@ -531,9 +531,7 @@ async function validateAdminSession() {
     if (result.data.user.role !== "Admin") {
 
         localStorage.clear();
-
         window.location.href = "login.html";
-
         return false;
 
     }
