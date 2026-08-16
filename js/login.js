@@ -24,7 +24,8 @@ async function login(){
             }
         );
 
-  hideLoading();
+  showLoading("Loading...");
+  
 
     if (!result.success) {
     
@@ -44,6 +45,8 @@ async function login(){
         "user",
         JSON.stringify(result.data.user)
     );
+
+  hideLoading();
     
     // Redirect based on role
     if (result.data.user.role === "Admin") {
