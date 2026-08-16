@@ -2,17 +2,20 @@ async function validateAdminSession() {
 
     const result = await api("validateSession");
 
-    console.log("Session check:", result);
-
-    // TEMPORARY: don't redirect
     if (!result.success) {
-        console.error("Session invalid");
+
+        localStorage.clear();
+        window.location.href = "login.html";
         return false;
+
     }
 
     if (result.data.user.role !== "Admin") {
-        console.error("Not an admin");
+
+        localStorage.clear();
+        window.location.href = "login.html";
         return false;
+
     }
 
     return true;
@@ -25,12 +28,13 @@ let polling = false;
 
 document.addEventListener("DOMContentLoaded", async () => {
 
+    // Check if local session exists
     if (!validateAdmin()) return;
 
+    // Verify session with backend
     const valid = await validateAdminSession();
-    
-    // TEMPORARY
-    console.log("Valid?", valid);
+
+    if (!valid) return;
     
     // Populate the performance dropdown first
     await loadPerformanceList();
