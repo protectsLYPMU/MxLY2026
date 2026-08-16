@@ -7,16 +7,15 @@ let currentPerformanceID = null;
 let hasSubmitted = false;
 let isPolling = false;
 
-function loadJudgeInfo() {
+function loadJudgeInfo(){
 
     const userJSON =
         localStorage.getItem("user");
 
-    if (!userJSON) {
+    if(!userJSON){
 
-        document.getElementById(
-            "judgeName"
-        ).textContent = "Test Judge";
+        window.location.href =
+            "login.html";
 
         return;
 
@@ -25,9 +24,9 @@ function loadJudgeInfo() {
     const user =
         JSON.parse(userJSON);
 
-    document.getElementById(
-        "judgeName"
-    ).textContent = user.name;
+    document.getElementById("judgeName")
+      .textContent =
+        user.name;
 
 }
 
