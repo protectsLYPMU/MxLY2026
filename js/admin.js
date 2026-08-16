@@ -297,12 +297,14 @@ async function startTimer() {
 }
 
 async function pauseTimer() {
-
+        showLoading("Loading...");
     // Immediately stop the local countdown
     clearInterval(timerInterval);
 
     const result =
         await api("pauseTimer");
+
+    hideLoading();
 
     if (!result.success) {
 
