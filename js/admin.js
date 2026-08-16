@@ -1,9 +1,47 @@
+function validateAdmin() {
+
+    const userJSON = localStorage.getItem("user");
+
+    const token = localStorage.getItem("sessionToken");
+
+    if (!userJSON || !token) {
+
+        window.location.href = "login.html";
+
+        return false;
+
+    }
+
+    const user = JSON.parse(userJSON);
+
+    if (user.role !== "Admin") {
+
+        alert("Administrator access only.");
+
+        localStorage.clear();
+
+        window.location.href = "login.html";
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
 let currentTimerDuration = 0;
 let timerInterval = null;
 let polling = false;
 
 document.addEventListener("DOMContentLoaded", async () => {
 
+    if (!validateAdmin()) return;
+
+    const valid = await validateAdminSession();
+
+    if (!valid) return;  
+    
     // Populate the performance dropdown first
     await loadPerformanceList();
 
@@ -473,5 +511,47 @@ function updateScoringState(isOpen) {
 
     document.getElementById("scoringStatus").textContent =
         isOpen ? "SCORING OPEN" : "SCORING CLOSED";
+
+}
+
+async function validateAdminSession() {
+
+    const result = await api("validateSession");
+
+    if (!result.success) {
+
+        localStorage.clear();
+
+        window.location.href = "login.html";
+
+        return false;
+
+    }
+
+    if (result.data.user.role !== "Admin") {
+
+        localStorage.clear();
+
+        window.location.href = "login.html";
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
+document
+    .getElementById("logoutBtn")
+    .addEventListener("click", logout);
+
+async function logout() {
+
+    await api("logout");
+
+    localStorage.clear();
+
+    window.location.href = "login.html";
 
 }
