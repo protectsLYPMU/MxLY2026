@@ -80,6 +80,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     document
           .getElementById("closeScoringBtn")
           .addEventListener("click", closeScoring);
+    
+    document
+    .getElementById("generateFinalistsBtn")
+    .addEventListener("click", generateFinalists);
 
     // Live polling
     setInterval(pollAdminState, 2000);
@@ -579,6 +583,47 @@ function validateAdmin() {
     }
 
     return true;
+}
+
+async function generateFinalists(){
+
+    const destinationSegmentID =
+        Number(
+            document.getElementById("finalistSegmentSelect").value
+        );
+
+    const topCount =
+        Number(
+            document.getElementById("topCountInput").value
+        );
+
+    if(!destinationSegmentID){
+
+        alert("Please select a destination segment.");
+
+        return;
+
+    }
+
+    if(!topCount || topCount < 1){
+
+        alert("Please enter a valid number of finalists.");
+
+        return;
+
+    }
+
+    const result =
+        await api(
+            "generateFinalists",
+            {
+                destinationSegmentID,
+                topCount
+            }
+        );
+
+    alert(result.message);
+
 }
 
 document
