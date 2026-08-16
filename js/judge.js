@@ -391,3 +391,22 @@ document.addEventListener(
 
     }
 );
+
+document
+  .getElementById("logoutBtn")
+  .addEventListener(
+    "click",
+    logout
+  );
+
+async function logout(){
+
+    await api("logout");
+
+    localStorage.removeItem("sessionToken");
+    localStorage.removeItem("user");
+
+    window.location.href =
+        "login.html";
+
+}
