@@ -1,37 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Judge Login</title>
-  <link rel="stylesheet" href="css/login.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+     <div class="top-bar">
+      <div id="connectionStatus" class="online">
+        ● Connected
+      </div>
+
+<title>Public Display</title>
+
+<link rel="stylesheet" href="css/display.css">
+
 </head>
+
 <body>
 
-<div class="login-card">
+<div class="container">
 
-  <h1>Judge Login</h1>
+    <h2 id="segmentName">
+        Loading...
+    </h2>
 
-  <input
-    id="username"
-    placeholder="Username"
-  >
+    <div id="candidateNumber"
+         class="number">
+        00
+    </div>
 
-  <input
-    id="password"
-    type="password"
-    placeholder="Password"
-  >
+    <h1 id="candidateName">
+        Loading...
+    </h1>
 
-  <button id="loginBtn">
-    Login
-  </button>
+  <div id="judgeScores" class="scores"></div>
 
-  <p id="message"></p>
+<div class="averageBox">
+
+    <p>Average Score</p>
+
+    <h1 id="averageScore">0.00</h1>
+
+</div>
+
+    <div id="timerDisplay"
+         class="timer">
+        00:00
+    </div>
 
 </div>
 
 <script src="js/api.js"></script>
-<script src="js/login.js"></script>
+<script src="js/display.js"></script>
 
 </body>
 </html>
