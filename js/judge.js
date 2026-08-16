@@ -404,3 +404,21 @@ async function logout(){
         "login.html";
 
 }
+
+function updateScoringState(isOpen) {
+
+    if (hasSubmitted) return;
+
+    document
+        .querySelectorAll("#scoreButtons button")
+        .forEach(button => {
+            button.disabled = !isOpen;
+        });
+
+    document.getElementById("submitScoreBtn").disabled =
+        !isOpen || selectedScore === null;
+
+    document.getElementById("scoreMessage").textContent =
+        isOpen ? "" : "Waiting for scoring to open.";
+
+}
