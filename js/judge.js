@@ -74,12 +74,12 @@ async function loadState() {
         document.getElementById("candidatePhoto");
     
     photo.src =
-        `images/candidates/${performance.candidate.CandidateID}.jpg`;
+        `images/candidates/${performance.candidate.CandidateID}.png`;
     
     photo.onerror = () => {
     
         photo.src =
-            "images/candidates/default.jpg";
+            "images/candidates/default.png";
     
     };
 
