@@ -22,27 +22,34 @@ async function login(){
             }
         );
 
-    if(!result.success){
-
-        document.getElementById("message")
-          .textContent =
+    if (!result.success) {
+    
+        document.getElementById("message").textContent =
             result.message;
-
+    
         return;
-
+    
     }
-
+    
     localStorage.setItem(
         "sessionToken",
         result.data.sessionToken
     );
-
+    
     localStorage.setItem(
         "user",
         JSON.stringify(result.data.user)
     );
-
-    window.location.href =
-        "judge.html";
+    
+    // Redirect based on role
+    if (result.data.user.role === "Admin") {
+    
+        window.location.href = "admin.html";
+    
+    } else {
+    
+        window.location.href = "judge.html";
+    
+    }
 
 }
