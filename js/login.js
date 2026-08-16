@@ -1,37 +1,48 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Judge Login</title>
-  <link rel="stylesheet" href="css/login.css">
-</head>
-<body>
+document
+  .getElementById("loginBtn")
+  .addEventListener(
+    "click",
+    login
+  );
 
-<div class="login-card">
+async function login(){
 
-  <h1>Judge Login</h1>
+    const username =
+        document.getElementById("username").value;
 
-  <input
-    id="username"
-    placeholder="Username"
-  >
+    const password =
+        document.getElementById("password").value;
 
-  <input
-    id="password"
-    type="password"
-    placeholder="Password"
-  >
+    const result =
+        await api(
+            "login",
+            {
+                username,
+                password
+            }
+        );
 
-  <button id="loginBtn">
-    Login
-  </button>
+    if(!result.success){
 
-  <p id="message"></p>
+        document.getElementById("message")
+          .textContent =
+            result.message;
 
-</div>
+        return;
 
-<script src="js/api.js"></script>
-<script src="js/login.js"></script>
+    }
 
-</body>
-</html>
+    localStorage.setItem(
+        "sessionToken",
+        result.data.sessionToken
+    );
+
+    localStorage.setItem(
+        "user",
+        JSON.stringify(result.data.user)
+    );
+
+    window.location.href =
+        "judge.html";
+
+}
