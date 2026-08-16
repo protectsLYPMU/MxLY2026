@@ -417,7 +417,11 @@ document
 
 async function logout(){
 
+    showLoading("Loading...");
+
     await api("logout");
+
+    hideLoading();
 
     localStorage.removeItem("sessionToken");
     localStorage.removeItem("user");
