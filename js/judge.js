@@ -35,6 +35,10 @@ async function loadState() {
     const result =
         await api("getCurrentState");
 
+    if(result.offline){
+    return;
+    }
+
     if (!result.success) {
 
         alert(result.message);
