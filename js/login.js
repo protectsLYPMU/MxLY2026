@@ -22,9 +22,7 @@ async function login(){
             }
         );
 
-  showLoading("Loading...");
   
-
     if (!result.success) {
     
         document.getElementById("message").textContent =
@@ -44,7 +42,7 @@ async function login(){
         JSON.stringify(result.data.user)
     );
 
-  hideLoading();
+  
     
     // Redirect based on role
     if (result.data.user.role === "Admin") {
