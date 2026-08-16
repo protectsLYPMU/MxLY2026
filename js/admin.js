@@ -1,29 +1,18 @@
-function validateAdmin() {
+async function validateAdminSession() {
 
-    const userJSON = localStorage.getItem("user");
+    const result = await api("validateSession");
 
-    const token = localStorage.getItem("sessionToken");
+    console.log("Session check:", result);
 
-    if (!userJSON || !token) {
-
-        window.location.href = "login.html";
-
+    // TEMPORARY: don't redirect
+    if (!result.success) {
+        console.error("Session invalid");
         return false;
-
     }
 
-    const user = JSON.parse(userJSON);
-
-    if (user.role !== "Admin") {
-
-        alert("Administrator access only.");
-
-        localStorage.clear();
-
-        window.location.href = "login.html";
-
+    if (result.data.user.role !== "Admin") {
+        console.error("Not an admin");
         return false;
-
     }
 
     return true;
@@ -39,8 +28,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!validateAdmin()) return;
 
     const valid = await validateAdminSession();
-
-    if (!valid) return;  
+    
+    // TEMPORARY
+    console.log("Valid?", valid);
     
     // Populate the performance dropdown first
     await loadPerformanceList();
