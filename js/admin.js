@@ -513,8 +513,12 @@ async function loadPerformanceList(){
 
 async function openScoring() {
 
+    showLoading("Loading...");
+
     const result =
         await api("openScoring");
+
+    hideLoading();
 
     if(result.success){
 
@@ -526,8 +530,12 @@ async function openScoring() {
 
 async function closeScoring() {
 
+    showLoading("Loading...");
+
     const result =
         await api("closeScoring");
+
+    hideLoading();
 
     if(result.success){
 
