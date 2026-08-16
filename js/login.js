@@ -6,6 +6,8 @@ document
   );
 
 async function login(){
+
+    showLoading("Loading...");
   
     const username =
         document.getElementById("username").value;
@@ -22,6 +24,7 @@ async function login(){
             }
         );
 
+    hideLoading();
   
     if (!result.success) {
     
