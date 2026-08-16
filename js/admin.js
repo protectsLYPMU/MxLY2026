@@ -1,5 +1,6 @@
 let currentTimerDuration = 0;
 let timerInterval = null;
+let polling = false;
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -47,6 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
             stopTimer
         );
 
+    setInterval(
+    pollAdminState,
+    2000
+);
+
 });
 
 async function loadState() {
@@ -77,6 +83,8 @@ async function loadState() {
     renderTimer(
     result.data.timer
     );
+
+    await loadJudgeStatuses();
 
 }
 
@@ -278,5 +286,77 @@ async function loadJudgeStatuses() {
     renderJudgeStatuses(
         result.data
     );
+
+}
+
+function renderJudgeStatuses(judges) {
+
+    const container =
+        document.getElementById(
+            "judgeStatusContainer"
+        );
+
+    container.innerHTML = "";
+
+    judges.forEach(judge => {
+
+        const row =
+            document.createElement("div");
+
+        row.style.display = "flex";
+        row.style.justifyContent = "space-between";
+        row.style.marginBottom = "8px";
+
+        const name =
+            document.createElement("span");
+
+        name.textContent =
+            judge.name;
+
+        const status =
+            document.createElement("span");
+
+        if (judge.submitted) {
+
+            status.textContent =
+                "✓ Submitted";
+
+            status.style.color =
+                "green";
+
+        } else {
+
+            status.textContent =
+                "Waiting";
+
+            status.style.color =
+                "orange";
+
+        }
+
+        row.appendChild(name);
+        row.appendChild(status);
+
+        container.appendChild(row);
+
+    });
+
+}
+
+async function pollAdminState() {
+
+    if (polling) return;
+
+    polling = true;
+
+    try {
+
+        await loadState();
+
+    } finally {
+
+        polling = false;
+
+    }
 
 }
