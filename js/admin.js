@@ -626,6 +626,37 @@ async function generateFinalists(){
 
 }
 
+async function loadFinalistSegments(){
+
+    const result =
+        await api("getSegments");
+
+    if(!result.success) return;
+
+    const select =
+        document.getElementById("finalistSegmentSelect");
+
+    select.innerHTML = "";
+
+    result.data.forEach(segment => {
+
+        const option =
+            document.createElement("option");
+
+        option.value =
+            segment.SegmentID;
+
+        option.textContent =
+            segment.SegmentName;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+await loadFinalistSegments();
+
 document
     .getElementById("logoutBtn")
     .addEventListener("click", logout);
