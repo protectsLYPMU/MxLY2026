@@ -394,17 +394,19 @@ function renderJudgeStatuses(judges) {
 
 }
 
-async function pollAdminState() {
+let polling = false;
+
+async function pollAdminState(){
 
     if (polling) return;
 
     polling = true;
 
-    try {
+    try{
 
         await loadState();
 
-    } finally {
+    }finally{
 
         polling = false;
 
