@@ -15,3 +15,18 @@
     background:#FEE2E2;
     color:#991B1B;
 }
+
+.candidate-photo-wrapper{
+    display:flex;
+    justify-content:center;
+    margin:20px 0;
+}
+
+.candidate-photo{
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    border-radius:18px;
+    border:4px solid white;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
