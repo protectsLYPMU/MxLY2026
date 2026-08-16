@@ -272,13 +272,13 @@ async function startTimer() {
             currentTimerDuration * 1000
     });
 
+    hideLoading();
+
     // Tell the backend to officially start the timer
     const result =
         await api("startTimer", {
             seconds: currentTimerDuration
         });
-
-    hideLoading();
 
     if (!result.success) {
 
@@ -320,8 +320,12 @@ async function pauseTimer() {
 
 async function resumeTimer() {
 
+    showLoading("Loading...");
+    
     const result =
         await api("resumeTimer");
+
+    hideLoading();
 
     if (!result.success) {
 
@@ -336,10 +340,14 @@ async function resumeTimer() {
 
 async function stopTimer() {
 
+    showLoading("Loading...");
+
     clearInterval(timerInterval);
 
     const result =
         await api("stopTimer");
+    
+    hideLoading();
 
     if (!result.success) {
 
@@ -449,6 +457,7 @@ document
   );
 
 async function jumpToPerformance(){
+    showLoading("Loading...");
 
     const performanceID =
         Number(
@@ -460,6 +469,8 @@ async function jumpToPerformance(){
             "jumpToPerformance",
             { performanceID }
         );
+
+    hideLoading();
 
     if(!result.success){
 
