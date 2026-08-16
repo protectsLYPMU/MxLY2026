@@ -70,6 +70,19 @@ async function loadState() {
     ).textContent =
         performance.candidate.Name;
 
+    const photo =
+        document.getElementById("candidatePhoto");
+    
+    photo.src =
+        `images/candidates/${performance.candidate.CandidateID}.jpg`;
+    
+    photo.onerror = () => {
+    
+        photo.src =
+            "images/candidates/default.jpg";
+    
+    };
+
     renderTimer(
         result.data.timer
     );
