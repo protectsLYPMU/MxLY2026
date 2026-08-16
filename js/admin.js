@@ -2,56 +2,47 @@ let currentTimerDuration = 0;
 let timerInterval = null;
 let polling = false;
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-    loadState();
+    // Populate the performance dropdown first
+    await loadPerformanceList();
 
+    // Then load the current state
+    await loadState();
+
+    // Navigation
     document
         .getElementById("nextBtn")
-        .addEventListener(
-            "click",
-            nextPerformance
-        );
+        .addEventListener("click", nextPerformance);
 
     document
         .getElementById("prevBtn")
-        .addEventListener(
-            "click",
-            previousPerformance
-        );
+        .addEventListener("click", previousPerformance);
 
+    // Timer controls
     document
         .getElementById("startTimerBtn")
-        .addEventListener(
-            "click",
-            startTimer
-        );
+        .addEventListener("click", startTimer);
 
     document
         .getElementById("pauseTimerBtn")
-        .addEventListener(
-            "click",
-            pauseTimer
-        );
+        .addEventListener("click", pauseTimer);
 
     document
         .getElementById("resumeTimerBtn")
-        .addEventListener(
-            "click",
-            resumeTimer
-        );
+        .addEventListener("click", resumeTimer);
 
     document
         .getElementById("stopTimerBtn")
-        .addEventListener(
-            "click",
-            stopTimer
-        );
+        .addEventListener("click", stopTimer);
 
-    setInterval(
-    pollAdminState,
-    2000
-);
+    // Jump button
+    document
+        .getElementById("jumpBtn")
+        .addEventListener("click", jumpToPerformance);
+
+    // Live polling
+    setInterval(pollAdminState, 2000);
 
 });
 
@@ -85,6 +76,11 @@ async function loadState() {
     );
 
     await loadJudgeStatuses();
+
+    document.getElementById(
+    "performanceSelect"
+).value =
+    performance.PerformanceID;
 
 }
 
@@ -358,5 +354,64 @@ async function pollAdminState() {
         polling = false;
 
     }
+
+}
+
+document
+  .getElementById("jumpBtn")
+  .addEventListener(
+    "click",
+    jumpToPerformance
+  );
+
+async function jumpToPerformance(){
+
+    const performanceID =
+        Number(
+            document.getElementById("performanceSelect").value
+        );
+
+    const result =
+        await api(
+            "jumpToPerformance",
+            { performanceID }
+        );
+
+    if(!result.success){
+
+        alert(result.message);
+
+        return;
+
+    }
+
+    await loadState();
+
+}
+
+async function loadPerformanceList(){
+
+    const result =
+        await api("getPerformanceList");
+
+    if(!result.success) return;
+
+    const select =
+        document.getElementById("performanceSelect");
+
+    select.innerHTML = "";
+
+    result.data.forEach(item=>{
+
+        const option =
+            document.createElement("option");
+
+        option.value = item.performanceID;
+
+        option.textContent = item.label;
+
+        select.appendChild(option);
+
+    });
 
 }
