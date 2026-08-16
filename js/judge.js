@@ -182,6 +182,7 @@ document
 
 async function submitScore() {
 
+
     if (selectedScore === null) {
         return;
     }
@@ -198,6 +199,8 @@ async function submitScore() {
 
         return;
     }
+
+    showLoading("Loading...");
 
     const result =
         await api(
@@ -217,6 +220,8 @@ async function submitScore() {
 
         return;
     }
+
+    hideLoading();
 
     hasSubmitted = true;
 
