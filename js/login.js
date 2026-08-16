@@ -6,8 +6,6 @@ document
   );
 
 async function login(){
-
-  showLoading("Loading...");
   
     const username =
         document.getElementById("username").value;
