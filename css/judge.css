@@ -30,3 +30,27 @@
     border:4px solid white;
     box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
+
+.spinner{
+
+    width:48px;
+    height:48px;
+
+    border:5px solid #E5E7EB;
+    border-top:5px solid #7C3AED;
+
+    border-radius:50%;
+
+    margin:0 auto 18px;
+
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
