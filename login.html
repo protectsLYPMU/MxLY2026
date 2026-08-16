@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Judge Login</title>
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
 
+<div class="login-card">
+
+  <h1>Judge Login</h1>
+
+  <input
+    id="username"
+    placeholder="Username"
+  >
+
+  <input
+    id="password"
+    type="password"
+    placeholder="Password"
+  >
+
+  <button id="loginBtn">
+    Login
+  </button>
+
+  <p id="message"></p>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/login.js"></script>
+
+</body>
+</html>
