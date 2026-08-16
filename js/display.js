@@ -99,13 +99,17 @@ async function checkState(){
             );
 
         if(newID !== currentPerformanceID){
-
+        
             await loadState();
-
+        
+            await loadScores();
+        
         }else{
-
+        
             renderTimer(result.data.timer);
-
+        
+            await loadScores();
+        
         }
 
     }finally{
@@ -128,3 +132,46 @@ async()=>{
     );
 
 });
+
+async function loadScores(){
+
+    const result =
+        await api("getCurrentPerformanceScores");
+
+    if(!result.success) return;
+
+    renderScores(
+        result.data.judgeScores,
+        result.data.average
+    );
+
+}
+
+function renderScores(judges, average){
+
+    const container =
+        document.getElementById("judgeScores");
+
+    container.innerHTML = "";
+
+    judges.forEach((judge,index)=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className = "scoreCard";
+
+        card.innerHTML = `
+            <span>J${index+1}</span>
+            <strong>${judge.score ?? "—"}</strong>
+        `;
+
+        container.appendChild(card);
+
+    });
+
+    document.getElementById("averageScore")
+      .textContent =
+        average.toFixed(2);
+
+}
