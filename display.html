@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Public Display</title>
+
+<link rel="stylesheet" href="css/display.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2 id="segmentName">
+        Loading...
+    </h2>
+
+    <div id="candidateNumber"
+         class="number">
+        00
+    </div>
+
+    <h1 id="candidateName">
+        Loading...
+    </h1>
+
+  <div id="judgeScores" class="scores"></div>
+
+<div class="averageBox">
+
+    <p>Average Score</p>
+
+    <h1 id="averageScore">0.00</h1>
+
+</div>
+
+    <div id="timerDisplay"
+         class="timer">
+        00:00
+    </div>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/display.js"></script>
+
+</body>
+</html>
