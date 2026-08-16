@@ -111,6 +111,19 @@ async function loadState() {
     document.getElementById("candidateName").textContent =
         performance.candidate.Name;
 
+    const photo =
+    document.getElementById("candidatePhoto");
+
+    photo.src =
+        `images/candidates/${performance.candidate.CandidateID}.png`;
+    
+    photo.onerror = () => {
+    
+        photo.src =
+            "images/candidates/default.png";
+    
+    };
+
     const scoringOpen =
         result.data.scoringOpen;
     
