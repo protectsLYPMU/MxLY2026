@@ -391,23 +391,23 @@ async function jumpToPerformance(){
 
 async function loadPerformanceList(){
 
-    const result =
-        await api("getPerformanceList");
+    const result = await api("getPerformanceList");
 
-    if(!result.success) return;
+    console.log(result);
 
-    const select =
-        document.getElementById("performanceSelect");
+    if(!result.success){
+        alert(result.message);
+        return;
+    }
 
+    const select = document.getElementById("performanceSelect");
     select.innerHTML = "";
 
     result.data.forEach(item=>{
 
-        const option =
-            document.createElement("option");
+        const option = document.createElement("option");
 
-        option.value = item.performanceID;
-
+        option.value = String(item.performanceID);
         option.textContent = item.label;
 
         select.appendChild(option);
