@@ -241,31 +241,25 @@ async function checkForStateChange() {
 
     try {
 
-        const result =
-            await api("getCurrentState");
+        const result = await api("getCurrentState");
 
-        if (!result.success) {
-            return;
-        }
+        if (!result.success) return;
+
+        // Always keep the timer synchronized
+        renderTimer(result.data.timer);
 
         const performanceID =
-            Number(
-                result.data.performance.PerformanceID
-            );
+            Number(result.data.performance.PerformanceID);
 
         if (currentPerformanceID === null) {
-
-            currentPerformanceID =
-                performanceID;
-
+            currentPerformanceID = performanceID;
             return;
-
         }
 
+        // Only reload the page state when the candidate changes
         if (performanceID !== currentPerformanceID) {
 
-            currentPerformanceID =
-                performanceID;
+            currentPerformanceID = performanceID;
 
             resetScore();
 
