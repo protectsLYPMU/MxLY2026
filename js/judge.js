@@ -5,11 +5,7 @@ let selectedScore = null;
 let currentPerformanceID = null;
 
 let hasSubmitted = false;
-
-// setInterval(
-//     checkForStateChange,
-//     2000
-// );
+let isPolling = false;
 
 function loadJudgeInfo() {
 
@@ -240,42 +236,49 @@ document
 
 async function checkForStateChange() {
 
-    const result =
-        await api("getCurrentState");
+    if (isPolling) return;
 
-    if (!result.success) {
-        return;
-    }
+    isPolling = true;
 
-    const performanceID =
-        Number(
-            result.data.performance.PerformanceID
-        );
+    try {
 
-    if (
-        currentPerformanceID === null
-    ) {
+        const result =
+            await api("getCurrentState");
 
-        currentPerformanceID =
-            performanceID;
+        if (!result.success) {
+            return;
+        }
 
-        return;
+        const performanceID =
+            Number(
+                result.data.performance.PerformanceID
+            );
 
-    }
+        if (currentPerformanceID === null) {
 
-    if (
-        performanceID !==
-        currentPerformanceID
-    ) {
+            currentPerformanceID =
+                performanceID;
 
-        currentPerformanceID =
-            performanceID;
+            return;
 
-        resetScore();
+        }
 
-        await loadState();
+        if (performanceID !== currentPerformanceID) {
 
-        await loadMyScore();
+            currentPerformanceID =
+                performanceID;
+
+            resetScore();
+
+            await loadState();
+
+            await loadMyScore();
+
+        }
+
+    } finally {
+
+        isPolling = false;
 
     }
 
@@ -381,6 +384,11 @@ document.addEventListener(
         await loadState();
 
         await loadMyScore();
+
+        setInterval(
+            checkForStateChange,
+            2000
+        );
 
     }
 );
