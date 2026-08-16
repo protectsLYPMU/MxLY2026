@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Populate the performance dropdown first
     await loadPerformanceList();
 
+    await loadFinalistSegments();
+
     // Then load the current state
     await loadState();
 
@@ -655,7 +657,6 @@ async function loadFinalistSegments(){
 
 }
 
-await loadFinalistSegments();
 
 document
     .getElementById("logoutBtn")
