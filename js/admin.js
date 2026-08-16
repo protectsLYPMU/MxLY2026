@@ -250,7 +250,7 @@ function displayTimer(seconds) {
 
 async function startTimer() {
 
-    showLoading("Loading...");
+    
 
     if (!currentTimerDuration ||
         currentTimerDuration <= 0) {
@@ -272,13 +272,16 @@ async function startTimer() {
             currentTimerDuration * 1000
     });
 
-    hideLoading();
+    showLoading("Loading...");
+    
 
     // Tell the backend to officially start the timer
     const result =
         await api("startTimer", {
             seconds: currentTimerDuration
         });
+
+    hideLoading();
 
     if (!result.success) {
 
