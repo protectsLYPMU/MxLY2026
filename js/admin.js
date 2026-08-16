@@ -265,3 +265,18 @@ async function stopTimer() {
     renderTimer(result.timer);
 
 }
+
+async function loadJudgeStatuses() {
+
+    const result =
+        await api("getJudgeStatuses");
+
+    if (!result.success) {
+        return;
+    }
+
+    renderJudgeStatuses(
+        result.data
+    );
+
+}
