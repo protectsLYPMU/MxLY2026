@@ -40,3 +40,28 @@ async function api(action, data = {}) {
     }
 
 }
+
+function setConnectionStatus(isOnline){
+
+    if(apiOnline === isOnline) return;
+
+    apiOnline = isOnline;
+
+    const badge =
+        document.getElementById("connectionStatus");
+
+    if(!badge) return;
+
+    if(isOnline){
+
+        badge.textContent = "● Connected";
+        badge.className = "online";
+
+    }else{
+
+        badge.textContent = "● Offline";
+        badge.className = "offline";
+
+    }
+
+}
