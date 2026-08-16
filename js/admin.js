@@ -41,6 +41,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         .getElementById("jumpBtn")
         .addEventListener("click", jumpToPerformance);
 
+    document
+          .getElementById("openScoringBtn")
+          .addEventListener("click", openScoring);
+        
+    document
+          .getElementById("closeScoringBtn")
+          .addEventListener("click", closeScoring);
+
     // Live polling
     setInterval(pollAdminState, 2000);
 
@@ -65,6 +73,17 @@ async function loadState() {
 
     document.getElementById("candidateName").textContent =
         performance.candidate.Name;
+
+    const scoringOpen =
+        result.data.scoringOpen;
+    
+    document.getElementById(
+        "openScoringBtn"
+    ).disabled = scoringOpen;
+    
+    document.getElementById(
+        "closeScoringBtn"
+    ).disabled = !scoringOpen;
     
     currentTimerDuration =
     Number(
@@ -81,6 +100,10 @@ async function loadState() {
     "performanceSelect"
 ).value =
     performance.PerformanceID;
+
+    updateScoringState(
+    result.data.scoringOpen
+);
 
 }
 
@@ -413,5 +436,58 @@ async function loadPerformanceList(){
         select.appendChild(option);
 
     });
+
+}
+
+async function openScoring() {
+
+    const result =
+        await api("openScoring");
+
+    if(result.success){
+
+        await loadState();
+
+    }
+
+}
+
+async function closeScoring() {
+
+    const result =
+        await api("closeScoring");
+
+    if(result.success){
+
+        await loadState();
+
+    }
+
+}
+
+function updateScoringState(isOpen) {
+
+    // Don't unlock if already submitted
+    if(hasSubmitted){
+        return;
+    }
+
+    document
+        .querySelectorAll("#scoreButtons button")
+        .forEach(button => {
+            button.disabled = !isOpen;
+        });
+
+    document.getElementById(
+        "submitScoreBtn"
+    ).disabled =
+        !isOpen || selectedScore === null;
+
+    document.getElementById(
+        "scoreMessage"
+    ).textContent =
+        isOpen
+        ? ""
+        : "Waiting for scoring to open.";
 
 }
