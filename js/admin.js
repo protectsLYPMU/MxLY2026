@@ -586,8 +586,11 @@ document
     .addEventListener("click", logout);
 
 async function logout() {
+    showLoading("Loading...");
 
     await api("logout");
+
+    hideLoading();
 
     localStorage.clear();
 
