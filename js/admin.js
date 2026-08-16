@@ -158,8 +158,11 @@ async function loadState() {
 }
 
 async function nextPerformance() {
+    showLoading("Loading...");
 
     const result = await api("nextPerformance");
+
+    hideLoading();
 
     if (!result.success) {
         alert(result.message);
@@ -172,7 +175,11 @@ async function nextPerformance() {
 
 async function previousPerformance() {
 
+    showLoading("Loading...");
+
     const result = await api("previousPerformance");
+
+    hideLoading();
 
     if (!result.success) {
         alert(result.message);
@@ -243,6 +250,8 @@ function displayTimer(seconds) {
 
 async function startTimer() {
 
+    showLoading("Loading...");
+
     if (!currentTimerDuration ||
         currentTimerDuration <= 0) {
 
@@ -268,6 +277,8 @@ async function startTimer() {
         await api("startTimer", {
             seconds: currentTimerDuration
         });
+
+    hideLoading();
 
     if (!result.success) {
 
