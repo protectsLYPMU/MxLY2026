@@ -626,6 +626,8 @@ async function generateFinalists(){
 
     alert(result.message);
 
+    loadPerformanceList();
+
 }
 
 async function loadFinalistSegments(){
