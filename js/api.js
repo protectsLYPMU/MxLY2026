@@ -1,32 +1,42 @@
 const API_URL =
 "https://script.google.com/macros/s/AKfycbyZr9TUeTYy_mcSRIghXC6xXkXRbB5FRZ8iAoOtZwQqyzhyBVq1nj52SKszXwEsiL7wrw/exec";
 
+let apiOnline = true;
+
 async function api(action, data = {}) {
 
-  const token = localStorage.getItem("sessionToken");
+    const token =
+        localStorage.getItem("sessionToken");
 
-  try {
+    try {
 
-    const response = await fetch(API_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        action,
-        sessionToken: token,
-        ...data
-      })
-    });
+        const response = await fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify({
+                action,
+                sessionToken: token,
+                ...data
+            })
+        });
 
-    return await response.json();
+        const result = await response.json();
 
-  } catch (err) {
+        setConnectionStatus(true);
 
-    console.error(err);
+        return result;
 
-    return {
-      success: false,
-      message: err.message
-    };
+    } catch (err) {
 
-  }
+        console.error(err);
+
+        setConnectionStatus(false);
+
+        return {
+            success: false,
+            offline: true,
+            message: "Connection lost"
+        };
+
+    }
 
 }
