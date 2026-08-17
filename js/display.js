@@ -38,7 +38,9 @@ async function loadState() {
     ).textContent =
         performance.candidate.Name;
 
+    requestAnimationFrame(() => {
     fitCandidateName();
+    });
 
     const photo =
     document.getElementById("candidatePhoto");
