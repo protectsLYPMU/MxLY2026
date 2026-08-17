@@ -38,6 +38,8 @@ async function loadState() {
     ).textContent =
         performance.candidate.Name;
 
+    fitCandidateName();
+
     const photo =
     document.getElementById("candidatePhoto");
 
@@ -87,6 +89,25 @@ async function checkState(){
 
         polling = false;
 
+    }
+
+}
+
+function fitCandidateName(){
+
+    const el =
+        document.getElementById("candidateName");
+
+    let size = 32;
+
+    el.style.fontSize = size + "px";
+
+    while(
+        el.scrollHeight > el.clientHeight &&
+        size > 18
+    ){
+        size--;
+        el.style.fontSize = size + "px";
     }
 
 }
