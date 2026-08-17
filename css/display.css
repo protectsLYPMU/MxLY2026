@@ -43,7 +43,7 @@ body{
 
 .display-container{
     width:92vw;
-    aspect-ratio:16/5.2;
+    aspect-ratio:16/6;
 
     background:#F3F1EC;
 
@@ -99,7 +99,8 @@ body{
 
 .candidate-photo{
     width:100%;
-    aspect-ratio:4/5;
+    height:auto;
+    max-height:360px;
 
     object-fit:cover;
 
@@ -109,7 +110,6 @@ body{
 
 .candidate-card{
     background:#6A3D3D;
-
     border-radius:12px;
 
     color:white;
@@ -117,6 +117,8 @@ body{
     padding:14px;
 
     text-align:center;
+
+    width:100%;
 }
 
 .candidate-number{
