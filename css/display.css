@@ -43,19 +43,17 @@ body{
 
 .display-container{
     width:92vw;
-    aspect-ratio:16/5.5;
+    max-width:1800px;
 
     background:#F3F1EC;
     border:4px solid #6E1830;
     border-radius:22px;
 
-    padding:16px;
+    padding:18px;
 
     display:grid;
-    grid-template-rows:60px 294px;
+    grid-template-rows:60px auto;
     gap:16px;
-
-    align-content:center;
 }
 
 .category-banner{
