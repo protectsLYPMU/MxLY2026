@@ -88,39 +88,38 @@ body{
 
 .candidate-column{
     display:grid;
-    grid-template-rows:300px 108px;
+    grid-template-rows:auto auto;
     gap:12px;
 
-    height:100%;
+    align-content:start;
 }
 
 .candidate-photo{
     width:100%;
-    flex:1;
-
-    min-height:0;
+    aspect-ratio:4/5;
 
     object-fit:cover;
 
     border-radius:12px;
     border:3px solid #6E1830;
+
+    display:block;
 }
 
 .candidate-card{
+    height:112px;
+
     background:#6A3D3D;
     border-radius:12px;
 
-    color:white;
-
     padding:12px;
-
-    height:120px;
+    color:white;
 
     display:flex;
     flex-direction:column;
     justify-content:center;
 
-    flex-shrink:0;
+    overflow:hidden;
 }
 
 .candidate-number{
@@ -146,7 +145,7 @@ body{
     grid-template-columns:repeat(5,1fr);
     gap:14px;
 
-    align-self:end;
+    align-self:center;
 }
 
 .scoreCard{
@@ -191,18 +190,17 @@ body{
 }
 
 .average-column{
-    grid-column:3;
-    grid-row:1;
-
     display:flex;
     flex-direction:column;
 
+    justify-self:stretch;
+    align-self:center;
+
+    height:230px;
+
     border:3px solid #6E1830;
     border-radius:12px;
-
     overflow:hidden;
-
-    align-self:stretch;
 }
 
 .average-value{
