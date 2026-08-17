@@ -95,6 +95,26 @@ async function checkState(){
 
 }
 
+function fitAverageScore(){
+
+    const el =
+        document.getElementById("averageScore");
+
+    let size = 72;
+
+    el.style.fontSize = size + "px";
+
+    while (
+        (el.scrollWidth > el.clientWidth ||
+         el.scrollHeight > el.clientHeight) &&
+        size > 36
+    ){
+        size--;
+        el.style.fontSize = size + "px";
+    }
+
+}
+
 function fitCandidateName(){
 
     const el =
@@ -169,7 +189,14 @@ function renderScores(judges, average){
 
     });
 
-    document.getElementById("averageScore").textContent =
+    const avgEl =
+        document.getElementById("averageScore");
+    
+    avgEl.textContent =
         average.toFixed(2);
+    
+    requestAnimationFrame(() => {
+        fitAverageScore();
+    });
 
 }
