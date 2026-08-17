@@ -124,10 +124,53 @@ body{
 }
 
 .judge-scores{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:16px;
+
+    align-content:center;
+    align-items:center;
+}
+
+.scoreCard{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.scoreValue{
+    background:radial-gradient(circle at 35% 30%,
+        #A98692 0%,
+        #7C5661 55%,
+        #68434D 100%);
+
+    color:white;
+
+    border-radius:12px;
+
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    gap:14px;
+    justify-content:center;
+
+    height:120px;
+
+    font-size:3rem;
+    font-weight:800;
+}
+
+.scoreLabel{
+    background:#D6C9BA;
+
+    border-radius:8px;
+
+    text-align:center;
+
+    padding:10px;
+
+    color:#333;
+
+    font-size:1rem;
+    font-weight:700;
 }
 
 .average-column{
