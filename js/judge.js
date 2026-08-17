@@ -145,15 +145,23 @@ function displayTimer(seconds) {
 
 }
 
-function selectScore(score) {
+function selectScore(score){
 
-    selectedScore =
-        Number(score);
+    selectedScore = Number(score);
 
-    document.getElementById(
-        "selectedScore"
-    ).textContent =
-        selectedScore;
+    document
+        .querySelectorAll(".score-btn")
+        .forEach(button => {
+
+            button.classList.remove("selected");
+
+            if (
+                Number(button.dataset.score) === selectedScore
+            ) {
+                button.classList.add("selected");
+            }
+
+        });
 
     document.getElementById(
         "submitScoreBtn"
@@ -299,15 +307,10 @@ async function checkForStateChange() {
 
 }
 
-function resetScore() {
+function resetScore(){
 
     selectedScore = null;
-
     hasSubmitted = false;
-
-    document.getElementById(
-        "selectedScore"
-    ).textContent = "None";
 
     document.getElementById(
         "scoreMessage"
@@ -318,12 +321,11 @@ function resetScore() {
     ).disabled = true;
 
     document
-        .querySelectorAll(
-            "#scoreButtons button"
-        )
+        .querySelectorAll(".score-btn")
         .forEach(button => {
 
             button.disabled = false;
+            button.classList.remove("selected");
 
         });
 
@@ -338,54 +340,34 @@ async function loadMyScore() {
         return;
     }
 
-    if (result.data.hasSubmitted) {
-
-        selectedScore =
-            result.data.score;
-
+    if (result.data.hasSubmitted){
+    
+        selectedScore = result.data.score;
         hasSubmitted = true;
-
-        document.getElementById(
-            "selectedScore"
-        ).textContent =
-            result.data.score;
-
+    
         document.getElementById(
             "scoreMessage"
         ).textContent =
-            "Score already submitted.";
-
+            "Score submitted successfully";
+    
         document.getElementById(
             "submitScoreBtn"
         ).disabled = true;
-
+    
         document
-            .querySelectorAll(
-                "#scoreButtons button"
-            )
+            .querySelectorAll(".score-btn")
             .forEach(button => {
-
+    
                 button.disabled = true;
-
+    
+                if (
+                    Number(button.dataset.score) === selectedScore
+                ) {
+                    button.classList.add("selected");
+                }
+    
             });
-
-        document
-                .querySelectorAll(
-                    "#scoreButtons button"
-                )
-                .forEach(button => {
-            
-                    if (
-                        Number(button.dataset.score) ===
-                        result.data.score
-                    ) {
-            
-                        button.style.fontWeight = "bold";
-            
-                    }
-            
-                });
-
+    
     }
 
 }
