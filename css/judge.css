@@ -174,11 +174,21 @@ body{
     margin-top:8px;
 
     text-align:center;
-    line-height:1.1;
+    line-height:1.05;
     font-weight:800;
 
+    /* Default size */
     font-size:28px;
+
+    /* Allow shrinking */
+    min-height:70px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
     overflow-wrap:anywhere;
+    word-break:break-word;
 }
 
 /* ---------- SCORE GRID ---------- */
