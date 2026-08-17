@@ -2,62 +2,80 @@
 <html lang="en">
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>Public Display</title>
+    <title>Public Display</title>
 
-<link rel="stylesheet" href="css/display.css">
+    <link rel="stylesheet" href="css/display.css">
 
 </head>
 
 <body>
 
-<div class="container">
+    <div class="display-container">
 
-    <h2 id="segmentName">
-        Loading...
-    </h2>
+        <!-- Category -->
+        <header class="category-banner">
 
-          <div class="hero-photo">
-      
-          <img
-              id="candidatePhoto"
-              src="images/candidates/default.png"
-          >
-      
-            </div>
-      
-      <div id="candidateNumber"
-         class="number">
-        00
+            <h1 id="segmentName">
+                Loading...
+            </h1>
+
+        </header>
+
+        <!-- Main Layout -->
+        <main class="display-grid">
+
+            <!-- Candidate Column -->
+            <aside class="candidate-column">
+
+                <img
+                    id="candidatePhoto"
+                    class="candidate-photo"
+                    src="images/candidates/default.png"
+                    alt="Candidate Photo">
+
+                <div class="candidate-card">
+
+                    <p class="candidate-number">
+                        Candidate #<span id="candidateNumber">00</span>
+                    </p>
+
+                    <h2 id="candidateName" class="candidate-name">
+                        Loading...
+                    </h2>
+
+                </div>
+
+            </aside>
+
+            <!-- Dynamic Judge Scores -->
+            <section id="judgeScores" class="judge-scores">
+                <!-- Populated by display.js -->
+            </section>
+
+            <!-- Average -->
+            <aside class="average-column">
+
+                <div id="averageScore" class="average-value">
+                    0.00
+                </div>
+
+                <div class="average-label">
+                    Average
+                </div>
+
+            </aside>
+
+        </main>
+
     </div>
 
-    <h1 id="candidateName">
-        Loading...
-    </h1>
-
-  <div id="judgeScores" class="scores"></div>
-
-<div class="averageBox">
-
-    <p>Average Score</p>
-
-    <h1 id="averageScore">0.00</h1>
-
-</div>
-
-    <div id="timerDisplay"
-         class="timer">
-        00:00
-    </div>
-
-</div>
-
-<script src="js/api.js"></script>
-<script src="js/display.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/display.js"></script>
 
 </body>
 </html>
