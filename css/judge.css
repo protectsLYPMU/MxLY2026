@@ -118,7 +118,7 @@ body{
     padding:12px;
 
     display:grid;
-    grid-template-columns:44% 56%;
+    grid-template-columns:44% minmax(0,1fr);
     gap:12px;
 
     align-items:stretch;
@@ -137,35 +137,16 @@ body{
     display:flex;
     flex-direction:column;
     gap:10px;
+
+    width:100%;
     min-width:0;
 }
 
-.category{
-    background:#7A1D2D;
-    color:white;
-
-    padding:12px;
-    border-radius:12px;
-
-    text-align:center;
-    font-weight:700;
-    font-size:15px;
-}
-
+.category,
 .candidate-panel{
-    flex:1;
-
-    background:#6A3D3D;
-    border-radius:12px;
-
-    color:white;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-
-    padding:12px;
+    width:100%;
     min-width:0;
+    box-sizing:border-box;
 }
 
 .candidate-number{
