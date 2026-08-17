@@ -196,15 +196,21 @@ body{
 }
 
 .average-value{
-    background:#7A1630;
+    flex:1;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
+    background:#7A1630;
     color:white;
-    font-size:4.5rem;
+
+    font-size:72px;      /* Starting size */
     font-weight:800;
+    line-height:1;
+
+    overflow:hidden;
+    padding:0 8px;
 }
 
 .average-label{
