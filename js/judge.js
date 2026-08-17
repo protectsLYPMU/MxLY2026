@@ -69,6 +69,7 @@ async function loadState() {
         "candidateName"
     ).textContent =
         performance.candidate.Name;
+    fitCandidateName();
 
     const photo =
         document.getElementById("candidatePhoto");
@@ -368,6 +369,30 @@ async function loadMyScore() {
     
             });
     
+    }
+
+}
+
+function fitCandidateName(){
+
+    const el =
+        document.getElementById("candidateName");
+
+    // Start with the largest size
+    let size = 28;
+
+    el.style.fontSize = size + "px";
+
+    // Shrink until the text fits
+    while(
+        el.scrollHeight > el.clientHeight &&
+        size > 16
+    ){
+
+        size--;
+
+        el.style.fontSize = size + "px";
+
     }
 
 }
