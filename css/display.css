@@ -52,10 +52,10 @@ body{
     padding:16px;
 
     display:grid;
-    grid-template-rows:60px 250px;
+    grid-template-rows:60px 294px;
     gap:16px;
 
-    align-content:top;
+    align-content:center;
 }
 
 .category-banner{
