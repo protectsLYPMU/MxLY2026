@@ -79,15 +79,22 @@ body{
 
     display:grid;
     grid-template-columns:280px 1fr 140px;
-    gap:18px;
+    grid-template-rows:1fr auto;
+
+    gap:16px;
 
     min-height:0;
 }
 
 .candidate-column{
+    grid-column:1;
+    grid-row:1 / span 2;
+
     display:flex;
     flex-direction:column;
     gap:12px;
+
+    min-width:0;
 }
 
 .candidate-photo{
@@ -124,12 +131,15 @@ body{
 }
 
 .judge-scores{
+    grid-column:2;
+    grid-row:1;
+
     display:grid;
     grid-template-columns:repeat(5,1fr);
-    gap:16px;
 
-    align-content:center;
-    align-items:center;
+    gap:14px;
+
+    align-self:end;
 }
 
 .scoreCard{
@@ -174,6 +184,9 @@ body{
 }
 
 .average-column{
+    grid-column:3;
+    grid-row:1;
+
     display:flex;
     flex-direction:column;
 
@@ -181,6 +194,8 @@ body{
     border-radius:12px;
 
     overflow:hidden;
+
+    align-self:stretch;
 }
 
 .average-value{
