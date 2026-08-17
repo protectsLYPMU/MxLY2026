@@ -52,8 +52,10 @@ body{
     padding:16px;
 
     display:grid;
-    grid-template-rows:60px 1fr;
-    gap:16px
+    grid-template-rows:60px 294px;
+    gap:16px;
+
+    align-content:center;
 }
 
 .category-banner{
