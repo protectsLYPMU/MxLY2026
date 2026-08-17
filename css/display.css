@@ -107,19 +107,18 @@ body{
 }
 
 .candidate-card{
-    height:112px;
-
     background:#6A3D3D;
     border-radius:12px;
+    color:white;
 
     padding:12px;
-    color:white;
+
+    height:120px;
+    overflow:hidden;
 
     display:flex;
     flex-direction:column;
     justify-content:center;
-
-    overflow:hidden;
 }
 
 .candidate-number{
@@ -128,16 +127,20 @@ body{
 }
 
 .candidate-name{
-    font-size:1.75rem;
-    font-weight:800;
-    line-height:1.05;
+    flex:1;
 
     display:flex;
     align-items:center;
     justify-content:center;
-    text-align:center;
 
-    flex:1;
+    text-align:center;
+    line-height:1.05;
+
+    font-size:32px;
+    font-weight:800;
+
+    min-height:0;
+    overflow:hidden;
 }
 
 .judge-scores{
@@ -193,10 +196,7 @@ body{
     display:flex;
     flex-direction:column;
 
-    justify-self:stretch;
-    align-self:center;
-
-    height:230px;
+    height:420px;
 
     border:3px solid #6E1830;
     border-radius:12px;
@@ -210,21 +210,22 @@ body{
     align-items:center;
     justify-content:center;
 
-    background:#6E1830;
-
+    background:#7A1630;
     color:white;
 
-    font-size:4rem;
+    font-size:72px;
     font-weight:800;
 }
 
 .average-label{
-    background:#D7CCBE;
+    height:58px;
 
-    text-align:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    padding:14px;
+    background:#D8CCBE;
 
+    font-size:18px;
     font-weight:700;
-    color:#333;
 }
