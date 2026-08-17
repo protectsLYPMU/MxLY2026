@@ -87,7 +87,8 @@ body{
     grid-template-columns:300px 1fr 150px;
     gap:18px;
 
-    align-items:stretch;
+    height:294px;           /* NEW */
+    align-items:center;
 }
 
 .candidate-column{
@@ -148,6 +149,8 @@ body{
     gap:16px;
 
     align-content:center;
+    align-self:center;      /* NEW */
+    height:100%;            /* NEW */
 }
 
 .scoreCard{
@@ -186,15 +189,16 @@ body{
 }
 
 .average-column{
-    height: 294px;
+    height:294px;
+
     display:grid;
-    grid-template-rows:1fr 56px;
+    grid-template-rows:1fr 46px;
 
     border:3px solid #6E1830;
     border-radius:14px;
-
     overflow:hidden;
-    align-self:center;
+
+    align-self:center;      /* NEW */
 }
 
 .average-value{
