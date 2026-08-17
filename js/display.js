@@ -51,50 +51,6 @@ async function loadState() {
     
     };
 
-    renderTimer(result.data.timer);
-
-}
-
-function renderTimer(timer){
-
-    clearInterval(timerInterval);
-
-    let remaining = timer.remaining;
-
-    displayTimer(remaining);
-
-    if(timer.status !== "Running") return;
-
-    timerInterval = setInterval(()=>{
-
-        remaining--;
-
-        if(remaining <= 0){
-
-            remaining = 0;
-
-            clearInterval(timerInterval);
-
-        }
-
-        displayTimer(remaining);
-
-    },1000);
-
-}
-
-function displayTimer(seconds){
-
-    const m = Math.floor(seconds/60);
-
-    const s = seconds%60;
-
-    document.getElementById("timerDisplay")
-      .textContent =
-        String(m).padStart(2,"0") +
-        ":" +
-        String(s).padStart(2,"0");
-
 }
 
 async function checkState(){
@@ -122,8 +78,6 @@ async function checkState(){
             await loadScores();
         
         }else{
-        
-            renderTimer(result.data.timer);
         
             await loadScores();
         
@@ -171,7 +125,7 @@ function renderScores(judges, average){
 
     container.innerHTML = "";
 
-    judges.forEach((judge,index)=>{
+    judges.forEach((judge, index) => {
 
         const card =
             document.createElement("div");
@@ -179,16 +133,20 @@ function renderScores(judges, average){
         card.className = "scoreCard";
 
         card.innerHTML = `
-            <span>J${index+1}</span>
-            <strong>${judge.score ?? "—"}</strong>
+            <div class="scoreValue">
+                ${judge.score ?? "—"}
+            </div>
+
+            <div class="scoreLabel">
+                ${judge.name || `Judge ${String.fromCharCode(65 + index)}`}
+            </div>
         `;
 
         container.appendChild(card);
 
     });
 
-    document.getElementById("averageScore")
-      .textContent =
+    document.getElementById("averageScore").textContent =
         average.toFixed(2);
 
 }
