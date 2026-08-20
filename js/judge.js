@@ -409,7 +409,7 @@ document.addEventListener(
 
         setInterval(
             checkForStateChange,
-            2000
+            1000
         );
 
     }
