@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     .addEventListener("click", generateFinalists);
 
     // Live polling
-    setInterval(pollAdminState, 2000);
+    setInterval(pollAdminState, 1000);
 
 });
 
